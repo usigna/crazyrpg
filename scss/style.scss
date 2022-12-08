@@ -103,6 +103,8 @@ body {
 .header {
   width: 100%;
   padding: 2.5rem 0;
+  position: absolute;
+  z-index: 2;
 }
 
 .header__wrapper {
@@ -130,8 +132,8 @@ body {
   @include gradient();
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-size: 500% 500%;
-  animation: gradient-animation 5s ease-in-out infinite;
+  // background-size: 500% 500%;
+  // animation: gradient-animation 5s ease-in-out infinite;
 }
 
 .icon {
@@ -154,7 +156,7 @@ body {
   z-index: 6;
   position: absolute;
   top: 2.5rem;
-  right: 10px;
+  right: 5%;
   cursor: pointer;
   transition: transform .3s .1s ease-in-out, visibility 0s .4s;
   display: block;
@@ -319,21 +321,203 @@ body {
   }
 }
 
-/* animations */
-@keyframes gradient-animation {
-  0% {
-    background-position: 0 50%;
-  } 50% {
-    background-position: 100% 50%;
-  } 100% {
-    background-position: 0 50%;
+/* section */
+.hero {
+  @include flex(row, center, center);
+  position: relative;
+  padding: 10rem 0;
+
+  @media screen and (min-width: $largeWidth) {
+    height: 100vh;
+    @include flex(row, flex-end, space-between);
+    padding: 0;
   }
 }
+
+/* container */
+.container {
+  @include flex(column, center, center);
+  text-align: center;
+
+  @media screen and (min-width: $largeWidth) {
+    @include flex(row, center, space-between);
+    text-align: left;
+  }
+}
+
+.container__item {
+  width: 100%;
+
+  @media screen and (min-width: $largeWidth) {
+    width: 50%;
+  }
+
+  &--image {
+    line-height: 0;
+    img {
+      width: 100%;
+    }
+  }
+}
+
+.text-wrapper {
+  padding-right: 2.5rem;
+}
+
+.title {
+  display: inline-block;
+  margin: 0 0 1rem;
+  width: auto;
+  font-size: 3rem;
+  text-transform: uppercase;
+}
+
+.btn {
+  display: inline-block;
+  color: $blackColor;
+  margin-top: 1rem;
+  text-decoration: none;
+  background-color: $whiteColor;
+  padding: 10px;
+  position: relative;
+  transition: background 0.2s;
+  z-index: 0;
+  font-weight: 500;
+
+  &::before {
+    content: "";
+    width: 0;
+    height: 100%;
+    @include gradient();
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: width 0.2s;
+  }
+
+  &:hover::before,
+  &:focus::before {
+    width: 100%;
+  }
+}
+
+.decoration {
+  width: 100vw;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+}
+
+.decoration__item {
+  width: 50px;
+  height: 50px;
+  opacity: 0;
+  background-color: $whiteColor;
+  position: absolute;
+  bottom: 0;
+  animation: decoration-animation 10s linear infinite;
+
+  &:nth-child(1) {
+    left: 5vw;
+    animation-delay: 9s;
+  }
+
+  &:nth-child(2) {
+    width: 30px;
+    height: 30px;
+    left: 15vw;
+    animation-delay: 5s;
+  }
+
+  &:nth-child(3) {
+    width: 60px;
+    height: 60px;
+    left: 25vw;
+    animation-delay: 3s;
+  }
+
+  &:nth-child(4) {
+    width: 25px;
+    height: 25px;
+    left: 30vw;
+    animation-delay: 8s;
+  }
+
+  &:nth-child(5) {
+    left: 40vw;
+    animation-delay: 3s;
+  }
+
+  &:nth-child(6) {
+    width: 35px;
+    height: 35px;
+    left: 55vw;
+    animation-delay: 6s;
+  }
+
+  &:nth-child(7) {
+    width: 40px;
+    height: 40px;
+    left: 65vw;
+    animation-delay: 2s;
+  }
+
+  &:nth-child(8) {
+    left: 75vw;
+    animation-delay: 4s;
+  }
+
+  &:nth-child(9) {
+    width: 45px;
+    height: 45px;
+    left: 80vw;
+    animation-delay: 1s;
+  }
+
+  &:nth-child(10) {
+    width: 60px;
+    height: 60px;
+    left: 90vw;
+    animation-delay: 3s;
+  }
+}
+
+.hidden-for-mobile {
+  display: none;
+
+  @media screen and (min-width: $largeWidth) {
+    display: block;
+  }
+}
+
+/* animations */
+// @keyframes gradient-animation {
+//   0% {
+//     background-position: 0 50%;
+//   } 50% {
+//     background-position: 100% 50%;
+//   } 100% {
+//     background-position: 0 50%;
+//   }
+// }
 
 @keyframes rotate-animation {
   0% {
     transform: rotate3d(0, 0, 0, 0);
   } 100% {
     transform: rotate3d(1, 1, 1, 360deg);
+  }
+}
+
+@keyframes decoration-animation {
+  0% {
+    transform: scale(0) rotate(0);
+    opacity: 0.2;
+    bottom: 0;
+  } 100% {
+    transform: scale(1.5) rotate(360deg);
+    opacity: 0.3;
+    bottom: 100vh;
   }
 }
