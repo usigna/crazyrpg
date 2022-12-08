@@ -1,0 +1,339 @@
+/* import */
+@import "./modules/fonts";
+@import "./modules/variables";
+@import "./modules/mixins";
+@import "./partials/normalize";
+
+/* general */
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  scroll-behavior: smooth;
+  font-size: 62.25%;
+  background-color: $blackColor;
+}
+
+body {
+  z-index: 0;
+  overflow-x: hidden;
+}
+
+.wrapper {
+  width: 90%;
+  max-width: 1350px;
+  margin: 0 auto;
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: $whiteColor;
+  font-family: "Poppins", "Arial", sans-serif;
+}
+
+/* web accessibility */
+.sr-only {
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  -webkit-clip-path: inset(50%);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  white-space: nowrap;
+}
+
+.skip-link {
+  clip: rect(1px, 1px, 1px, 1px);
+  -webkit-clip-path: inset(50%);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+  white-space: nowrap;
+  text-align: center;
+  text-decoration: none;
+  padding: 1rem 3.5rem;
+  position: absolute;
+  top: 0;
+  left: 1.5rem;
+  z-index: 999;
+  color: $blackColor;
+  background-color: $whiteColor;
+  &:focus,
+  &:active {
+    clip: auto;
+    -webkit-clip-path: none;
+    clip-path: none;
+    height: auto;
+    margin: auto;
+    overflow: visible;
+    width: auto;
+    white-space: normal;
+  }
+}
+
+/* scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: $secondBlackColor;
+}
+
+::-webkit-scrollbar-thumb {
+  @include gradient();
+  border-radius: 5px;  
+}
+
+/* header */
+.header {
+  width: 100%;
+  padding: 2.5rem 0;
+}
+
+.header__wrapper {
+  @include flex(row, flex-end, space-between);
+  letter-spacing: 0.5px;
+  padding: 0 10px;
+
+  @media screen and (min-width: $largeWidth) {
+    padding: 0;
+  }
+}
+
+.logo {
+  margin: 0;
+  position: relative;
+  z-index: 6;
+  font-size: 2.75rem;
+
+  @media screen and (min-width: $largeWidth) {
+    padding: 0;
+  }
+}
+
+.gradient {
+  @include gradient();
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 500% 500%;
+  animation: gradient-animation 5s ease-in-out infinite;
+}
+
+.icon {
+  &--header {
+    font-size: 85%;
+    vertical-align: 10%;
+  }
+}
+
+/* hamburger */
+.hamburger {
+  width: 50px;
+  height: 45px;
+  display: inline-block;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  border-radius: 5px;
+  z-index: 6;
+  position: absolute;
+  top: 2.5rem;
+  right: 10px;
+  cursor: pointer;
+  transition: transform .3s .1s ease-in-out, visibility 0s .4s;
+  display: block;
+
+  @media screen and (min-width: $largeWidth) {
+    display: none;
+  }
+}
+
+.hamburger__box {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  position: relative;
+}
+
+.hamburger__inner {
+  width: 50%;
+  height: 3px;
+  background-color: $whiteColor;
+  border-radius: 25px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: background-color 0.1s 0.2s ease-in-out;
+
+  &::before,
+  &::after {
+    content: "";
+    width: 150%;
+    height: 3px;
+    @include gradient();
+    border-radius: 25px;
+    position: absolute;
+    right: 0;
+    transition: transform 0.2s 0.2s ease-in-out;
+  }
+
+  &::before {
+    top: -10px;
+  }
+
+  &::after {
+    top: 10px;
+  }
+}
+
+.hamburger--active {
+  background-color: transparent;
+
+  .hamburger__inner {
+    background: transparent;
+
+    &::before {
+      transform: translateY(10px) rotate(45deg);
+    }
+
+    &::after {
+      transform: translateY(-10px) rotate(-45deg);
+    }
+  }
+}
+
+/* navigation */
+.navigation {
+  height: auto;
+  width: 100%;
+  padding: 10rem 0;
+  background: $blackColor;
+  @include flex(column, center, center);
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  transform: translateY(-100%);
+  z-index: 5;
+  transition: transform .3s .1s ease-in-out, visibility 0s .4s;
+
+  @media screen and (min-width: $largeWidth) {
+    height: auto;
+    padding: 0;
+    background: transparent;
+    visibility: visible;
+    transform: translateY(0);
+    z-index: 0;
+    position: static;
+  }
+}
+
+.navigation--active {
+  transform: translateY(0px);
+  transition: transform .3s .1s ease-in-out, visibility 0s 0s;
+  visibility: visible;
+}
+
+.navigation__list {
+  width: 100%;
+  max-width: 700px;
+  height: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 5.5rem 0;
+  line-height: 2;
+  text-align: center;
+  z-index: 5;
+
+  @media screen and (min-width: $largeWidth) {
+    margin: 0;
+    padding: 0;
+    @include flex(row, flex-end, space-between);
+  }
+}
+
+.navigation__item {
+  text-align: center;
+
+  @media screen and (min-width: $largeWidth) {
+    margin-left: 2.5rem;
+  }
+}
+
+.navigation__link {
+  display: block;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.8rem;
+  color: $whiteColor;
+  padding: 0.5rem 0;
+  margin-bottom: 1rem;
+  position: relative;
+  transition: background 0.2s;
+  display: inline-block;
+
+  &:hover,
+  &:focus {
+    @include gradient();
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  @media screen and (min-width: $largeWidth) {
+    padding: 0 1rem;
+    margin-bottom: 0;
+
+    &::after {
+      content: "";
+      width: 10px;
+      height: 10px;
+      @include gradient();
+      position: absolute;
+      top: -10px;
+      left: calc(50% - 5px);
+      transform: scale(0);
+    }
+  
+    &:hover::after,
+    &:focus::after {
+      transform: scale(1);
+      animation: rotate-animation 2.5s ease-in-out infinite;
+    }
+  }
+}
+
+/* animations */
+@keyframes gradient-animation {
+  0% {
+    background-position: 0 50%;
+  } 50% {
+    background-position: 100% 50%;
+  } 100% {
+    background-position: 0 50%;
+  }
+}
+
+@keyframes rotate-animation {
+  0% {
+    transform: rotate3d(0, 0, 0, 0);
+  } 100% {
+    transform: rotate3d(1, 1, 1, 360deg);
+  }
+}
