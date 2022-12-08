@@ -323,13 +323,11 @@ body {
 
 /* section */
 .hero {
-  @include flex(row, center, center);
   position: relative;
-  padding: 10rem 0;
+  padding: 15rem 0;
 
   @media screen and (min-width: $largeWidth) {
     height: 100vh;
-    @include flex(row, flex-end, space-between);
     padding: 0;
   }
 }
@@ -343,10 +341,18 @@ body {
     @include flex(row, center, space-between);
     text-align: left;
   }
+
+  &--hero {
+    @media screen and (min-width: $largeWidth) {
+      height: 100vh;
+    }
+  }
 }
 
 .container__item {
   width: 100%;
+  height: 100%;
+  @include flex(row, center, center);
 
   @media screen and (min-width: $largeWidth) {
     width: 50%;
@@ -354,8 +360,11 @@ body {
 
   &--image {
     line-height: 0;
+    position: relative;
     img {
       width: 100%;
+      position: absolute;
+      bottom: 0;
     }
   }
 }
@@ -375,7 +384,7 @@ body {
 .btn {
   display: inline-block;
   color: $blackColor;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   text-decoration: none;
   background-color: $whiteColor;
   padding: 10px;
