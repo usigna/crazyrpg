@@ -95,7 +95,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  @include gradient();
+  background-color: $whiteColor;
   border-radius: 5px;  
 }
 
