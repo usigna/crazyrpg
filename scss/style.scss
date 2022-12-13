@@ -322,14 +322,49 @@ body {
 }
 
 /* section */
+.section {
+  padding: 5rem 0;
+  position: relative;
+
+  @media screen and (min-width: $largeWidth) {
+    padding: 10rem 0;
+  }
+}
+
 .hero {
   padding: 15rem 0;
   z-index: 0;
   position: relative;
 
+  &::before {
+    content: "";
+    width: 100%;
+    height: 5px;
+    background-color: $whiteColor;
+    opacity: 0.2;
+    position: absolute;
+    right: 0;
+    bottom: -5px;
+  }
+
   @media screen and (min-width: $largeWidth) {
     height: 100vh;
     padding: 0;
+
+    &::before {
+      width: 60%;
+    }
+  }
+}
+
+.section__wrapper {
+  @include flex(column, flex-start, center);
+  text-align: center;
+
+  @media screen and (min-width: $largeWidth) {
+    height: 100%;
+    @include flex(row, center, space-between);
+    text-align: left;
   }
 }
 
@@ -344,13 +379,16 @@ body {
   }
 }
 
-.hero__item {
+.hero__item,
+.section__item {
   width: 100%;
 
   @media screen and (min-width: $largeWidth) {
     width: 50%;
   }
+}
 
+.hero__item {
   &--image {
     height: 100%;
     position: relative;
@@ -365,17 +403,23 @@ body {
 
 .title {
   display: inline-block;
-  margin: 0 0 1rem;
+  margin: 0 0 1.5rem;
   width: auto;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   font-size: 3.5rem;
+
+  &--small {
+    text-transform: none;
+    font-size: 2.5rem;
+    margin: 0;
+  }
 }
 
 .btn {
   display: inline-block;
   color: $blackColor;
-  margin-top: 1.5rem;
+  margin-top: 2.5rem;
   text-decoration: none;
   background-color: $whiteColor;
   padding: 10px;
@@ -497,6 +541,74 @@ body {
     display: block;
   }
 }
+
+.video-wrapper {
+  max-width: 854px;
+  position: relative;
+  padding: 3rem;
+  margin: 0 auto;
+}
+
+.video {
+  width: 100%;
+  object-fit: cover;
+}
+
+.overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.text-wrapper {
+  padding: 1rem 0;
+}
+
+.list {
+  padding: 0;
+  list-style: none;
+}
+
+.list__icon {
+  width: 20px;
+  margin-right: 0.5rem;
+}
+
+.list__link {
+  color: $whiteColor;
+  text-decoration: none;
+  position: relative;
+
+  &:hover,
+  &:focus {
+    @include gradient();
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  &::before {
+    content: "";
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px dotted $whiteColor;
+    position: absolute;
+    left: 0;
+    bottom: 1px;
+  }
+
+  &:hover::before,
+  &:focus::before {
+    border-color: $goldColor;
+  }
+}
+
+.text {
+  margin: 0;
+}
+
+
 
 /* animations */
 // @keyframes gradient-animation {
