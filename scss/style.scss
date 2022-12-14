@@ -655,6 +655,18 @@ body {
 .line {
   position: relative;
 
+  &--full {
+    &::before {
+      content: "";
+      width: 100%;
+      height: 5px;
+      background-color: $whiteColor;
+      opacity: 0.2;
+      position: absolute;
+      bottom: -5px;
+    }
+  }
+
   &--left,
   &--right {
     &::before {
@@ -683,6 +695,79 @@ body {
   &--right {
     &::before {
       right: 0;
+    }
+  }
+}
+
+.boxes {
+  width: 100%;
+  @include flex(column, flex-start, center);
+
+  @media screen and (min-width: $mediumWidth) {
+    @include flex(row, flex-start, center);
+    flex-wrap: wrap;
+  }
+}
+
+.box {
+  width: 100%;
+
+  @media screen and (min-width: $mediumWidth) {
+    width: 50%;
+  }
+
+  @media screen and (min-width: $largeWidth) {
+    width: 20%;
+    padding: 0 2.5rem;
+
+    &:nth-of-type(1) {
+      width: 40%;
+      padding-left: 0;
+    }
+  }
+}
+
+/* footer */
+.footer {
+  padding: 2.5rem 0;
+}
+
+.footer__wrapper {
+  @include flex(column, center, center);
+  line-height: 2;
+
+  @media screen and (min-width: $mediumWidth) {
+    @include flex(row, center, space-between);
+    line-height: 1.5;
+  }
+}
+
+.footer__item {
+  a {
+    color: $whiteColor;
+    text-decoration: none;
+    position: relative;
+
+    &:hover,
+    &:focus {
+      @include gradient();
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  
+    &::before {
+      content: "";
+      width: 100%;
+      height: 1px;
+      border-bottom: 1px dotted $whiteColor;
+      position: absolute;
+      left: 0;
+      bottom: 1px;
+    }
+  
+    &:hover::before,
+    &:focus::before {
+      border-color: $goldColor;
     }
   }
 }
