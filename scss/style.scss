@@ -316,12 +316,16 @@ body {
     &:hover::after,
     &:focus::after {
       transform: scale(1);
-      animation: rotate-animation 2.5s linear infinite;
+      animation: rotate3d-animation 2.5s linear infinite;
     }
   }
 }
 
 /* section */
+.main {
+  position: relative;
+}
+
 .section {
   padding: 5rem 0;
   position: relative;
@@ -336,24 +340,9 @@ body {
   z-index: 0;
   position: relative;
 
-  &::before {
-    content: "";
-    width: 100%;
-    height: 5px;
-    background-color: $whiteColor;
-    opacity: 0.2;
-    position: absolute;
-    right: 0;
-    bottom: -5px;
-  }
-
   @media screen and (min-width: $largeWidth) {
     height: 100vh;
     padding: 0;
-
-    &::before {
-      width: 60%;
-    }
   }
 }
 
@@ -365,6 +354,12 @@ body {
     height: 100%;
     @include flex(row, center, space-between);
     text-align: left;
+  }
+
+  &--column {
+    @media screen and (min-width: $largeWidth) {
+      @include flex(column, flex-start, center);
+    }
   }
 }
 
@@ -403,8 +398,8 @@ body {
 
 .title {
   display: inline-block;
+  width: 100%;
   margin: 0 0 1.5rem;
-  width: auto;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   font-size: 3.5rem;
@@ -467,7 +462,7 @@ body {
   background-color: $whiteColor;
   position: absolute;
   bottom: 0;
-  animation: decoration-animation 10s linear infinite;
+  animation: decoration-animation 20s linear infinite;
 
   &:nth-child(1) {
     left: 5vw;
@@ -478,7 +473,8 @@ body {
     width: 30px;
     height: 30px;
     left: 15vw;
-    animation-delay: 5s;
+    border: 5px solid $whiteColor;
+    background-color: transparent;
   }
 
   &:nth-child(3) {
@@ -492,12 +488,13 @@ body {
     width: 20px;
     height: 20px;
     left: 30vw;
-    animation-delay: 8s;
   }
 
   &:nth-child(5) {
     left: 40vw;
     animation-delay: 3s;
+    border: 5px solid $whiteColor;
+    background-color: transparent;
   }
 
   &:nth-child(6) {
@@ -505,25 +502,28 @@ body {
     height: 30px;
     left: 55vw;
     animation-delay: 6s;
+    border: 5px solid $whiteColor;
+    background-color: transparent;
   }
 
   &:nth-child(7) {
     width: 40px;
     height: 40px;
     left: 65vw;
-    animation-delay: 2s;
+    animation-delay: 5s;
   }
 
   &:nth-child(8) {
     left: 75vw;
-    animation-delay: 4s;
+    animation-delay: 7s;
   }
 
   &:nth-child(9) {
     width: 40px;
     height: 40px;
     left: 80vw;
-    animation-delay: 1s;
+    border: 5px solid $whiteColor;
+    background-color: transparent;
   }
 
   &:nth-child(10) {
@@ -531,6 +531,45 @@ body {
     height: 60px;
     left: 90vw;
     animation-delay: 3s;
+  }
+
+  &:nth-child(11) {
+    width: 30px;
+    height: 30px;
+    left: 10vw;
+    animation-delay: 15s;
+    border: 5px solid $whiteColor;
+    background-color: transparent;
+  }
+
+  &:nth-child(12) {
+    width: 20px;
+    height: 20px;
+    left: 40vw;
+    animation-delay: 18s;
+  }
+
+  &:nth-child(13) {
+    left: 50vw;
+    animation-delay: 20s;
+    border: 5px solid $whiteColor;
+    background-color: transparent;
+  }
+
+  &:nth-child(14) {
+    width: 30px;
+    height: 30px;
+    left: 55vw;
+    animation-delay: 10s;
+  }
+
+  &:nth-child(15) {
+    width: 40px;
+    height: 40px;
+    left: 90vw;
+    animation-delay: 9s;
+    border: 5px solid $whiteColor;
+    background-color: transparent;
   }
 }
 
@@ -569,6 +608,11 @@ body {
 .list {
   padding: 0;
   list-style: none;
+  line-height: 2;
+
+  @media screen and (min-width: $largeWidth) {
+    line-height: 1.5;
+  }
 }
 
 .list__icon {
@@ -605,10 +649,43 @@ body {
 }
 
 .text {
-  margin: 0;
+  margin: 0 0 1.5rem;
 }
 
+.line {
+  position: relative;
 
+  &--left,
+  &--right {
+    &::before {
+      content: "";
+      width: 100%;
+      height: 5px;
+      background-color: $whiteColor;
+      opacity: 0.2;
+      position: absolute;
+      bottom: -5px;
+    }
+
+    @media screen and (min-width: $largeWidth) {
+      &::before {
+        width: 60%;
+      }
+    }
+  }
+
+  &--left {
+    &::before {
+      left: 0;
+    }
+  }
+
+  &--right {
+    &::before {
+      right: 0;
+    }
+  }
+}
 
 /* animations */
 // @keyframes gradient-animation {
@@ -621,7 +698,7 @@ body {
 //   }
 // }
 
-@keyframes rotate-animation {
+@keyframes rotate3d-animation {
   0% {
     transform: rotate3d(0, 0, 0, 0);
   } 100% {
@@ -637,6 +714,6 @@ body {
   } 100% {
     transform: scale(1) rotate(360deg);
     opacity: 0.2;
-    bottom: 100vh;
+    bottom: 100%;
   }
 }
