@@ -65,7 +65,7 @@ function useScrollReveal() {
 }
 
 function showAnimations() {
-  const mobile = window.matchMedia("screen and (min-width: 750px)");
+  const mobile = window.matchMedia("screen and (min-width: 1250px)");
 
   if (mobile.matches) {
       useScrollReveal();
