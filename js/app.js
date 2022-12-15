@@ -81,7 +81,7 @@ function showAnimations() {
 const init = function () {
   showHamburgerMenu();
   useGallery();
-  showAnimations();
+  // showAnimations();
 };
 
 document.addEventListener('DOMContentLoaded', init);
