@@ -51,9 +51,37 @@ function useGallery() {
   });
 }
 
+function useScrollReveal() {
+  const slideUp = {
+      duration: 2500,
+      delay: 200,
+      easing: "ease-out",
+      scale: 1,
+      distance: "12rem"
+  };
+
+  ScrollReveal().reveal(".animation", {delay: 300});
+  ScrollReveal().reveal(".animation-show", slideUp);
+}
+
+function showAnimations() {
+  const mobile = window.matchMedia("screen and (min-width: 750px)");
+
+  if (mobile.matches) {
+      useScrollReveal();
+  }
+
+  mobile.addListener( function(mobile) {
+      if (mobile.matches) {
+          useScrollReveal();
+      }
+  });
+};
+
 const init = function () {
   showHamburgerMenu();
   useGallery();
+  showAnimations();
 };
 
 document.addEventListener('DOMContentLoaded', init);

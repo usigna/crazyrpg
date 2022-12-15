@@ -132,8 +132,6 @@ body {
   @include gradient();
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  // background-size: 500% 500%;
-  // animation: gradient-animation 5s ease-in-out infinite;
 }
 
 .icon {
@@ -158,7 +156,11 @@ body {
   top: 2.5rem;
   right: 5%;
   cursor: pointer;
+  -webkit-transition: visibility 0s .4s, -webkit-transform .3s .1s ease-in-out;
+  transition: visibility 0s .4s, -webkit-transform .3s .1s ease-in-out;
+  -o-transition: transform .3s .1s ease-in-out, visibility 0s .4s;
   transition: transform .3s .1s ease-in-out, visibility 0s .4s;
+  transition: transform .3s .1s ease-in-out, visibility 0s .4s, -webkit-transform .3s .1s ease-in-out;
   display: block;
 
   @media screen and (min-width: $largeWidth) {
@@ -181,7 +183,11 @@ body {
   position: absolute;
   right: 0;
   top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
   transform: translateY(-50%);
+  -webkit-transition: background-color 0.1s 0.2s ease-in-out;
+  -o-transition: background-color 0.1s 0.2s ease-in-out;
   transition: background-color 0.1s 0.2s ease-in-out;
 
   &::before,
@@ -193,7 +199,11 @@ body {
     border-radius: 25px;
     position: absolute;
     right: 0;
+    -webkit-transition: -webkit-transform 0.2s 0.2s ease-in-out;
+    transition: -webkit-transform 0.2s 0.2s ease-in-out;
+    -o-transition: transform 0.2s 0.2s ease-in-out;
     transition: transform 0.2s 0.2s ease-in-out;
+    transition: transform 0.2s 0.2s ease-in-out, -webkit-transform 0.2s 0.2s ease-in-out;
   }
 
   &::before {
@@ -212,10 +222,14 @@ body {
     background: transparent;
 
     &::before {
+      -webkit-transform: translateY(10px) rotate(45deg);
+      -ms-transform: translateY(10px) rotate(45deg);
       transform: translateY(10px) rotate(45deg);
     }
 
     &::after {
+      -webkit-transform: translateY(-10px) rotate(-45deg);
+      -ms-transform: translateY(-10px) rotate(-45deg);
       transform: translateY(-10px) rotate(-45deg);
     }
   }
@@ -232,15 +246,23 @@ body {
   top: 0;
   left: 0;
   visibility: hidden;
+  -webkit-transform: translateY(-100%);
+  -ms-transform: translateY(-100%);
   transform: translateY(-100%);
   z-index: 5;
+  -webkit-transition: visibility 0s .4s, -webkit-transform .3s .1s ease-in-out;
+  transition: visibility 0s .4s, -webkit-transform .3s .1s ease-in-out;
+  -o-transition: transform .3s .1s ease-in-out, visibility 0s .4s;
   transition: transform .3s .1s ease-in-out, visibility 0s .4s;
+  transition: transform .3s .1s ease-in-out, visibility 0s .4s, -webkit-transform .3s .1s ease-in-out;
 
   @media screen and (min-width: $largeWidth) {
     height: auto;
     padding: 0;
     background: transparent;
     visibility: visible;
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
     transform: translateY(0);
     z-index: 0;
     position: static;
@@ -248,8 +270,14 @@ body {
 }
 
 .navigation--active {
+  -webkit-transform: translateY(0px);
+  -ms-transform: translateY(0px);
   transform: translateY(0px);
+  -webkit-transition: visibility 0s 0s, -webkit-transform .3s .1s ease-in-out;
+  transition: visibility 0s 0s, -webkit-transform .3s .1s ease-in-out;
+  -o-transition: transform .3s .1s ease-in-out, visibility 0s 0s;
   transition: transform .3s .1s ease-in-out, visibility 0s 0s;
+  transition: transform .3s .1s ease-in-out, visibility 0s 0s, -webkit-transform .3s .1s ease-in-out;
   visibility: visible;
 }
 
@@ -288,6 +316,8 @@ body {
   padding: 0.5rem 0;
   margin-bottom: 1rem;
   position: relative;
+  -webkit-transition: background 0.2s;
+  -o-transition: background 0.2s;
   transition: background 0.2s;
   display: inline-block;
 
@@ -310,12 +340,17 @@ body {
       position: absolute;
       top: -10px;
       left: calc(50% - 5px);
+      -webkit-transform: scale(0);
+      -ms-transform: scale(0);
       transform: scale(0);
     }
   
     &:hover::after,
     &:focus::after {
+      -webkit-transform: scale(1);
+      -ms-transform: scale(1);
       transform: scale(1);
+      -webkit-animation: rotate3d-animation 2.5s linear infinite;
       animation: rotate3d-animation 2.5s linear infinite;
     }
   }
@@ -427,6 +462,8 @@ body {
   background-color: $whiteColor;
   padding: 10px;
   position: relative;
+  -webkit-transition: background 0.2s;
+  -o-transition: background 0.2s;
   transition: background 0.2s;
   z-index: 0;
   font-weight: 500;
@@ -440,6 +477,8 @@ body {
     top: 0;
     left: 0;
     z-index: -1;
+    -webkit-transition: width 0.2s;
+    -o-transition: width 0.2s;
     transition: width 0.2s;
   }
 
@@ -456,11 +495,6 @@ body {
   top: 0;
   left: 0;
   z-index: -1;
-  display: none;
-
-  @media screen and (min-width: $mediumWidth) {
-    display: block;
-  }
 }
 
 .decoration__item {
@@ -470,10 +504,12 @@ body {
   background-color: $whiteColor;
   position: absolute;
   bottom: 0;
-  animation: decoration-animation 20s linear infinite;
+  -webkit-animation: decoration-animation 25s linear infinite;
+  animation: decoration-animation 25s linear infinite;
 
   &:nth-child(1) {
     left: 5vw;
+    -webkit-animation-delay: 9s;
     animation-delay: 9s;
   }
 
@@ -489,6 +525,7 @@ body {
     width: 60px;
     height: 60px;
     left: 25vw;
+    -webkit-animation-delay: 3s;
     animation-delay: 3s;
   }
 
@@ -500,6 +537,7 @@ body {
 
   &:nth-child(5) {
     left: 40vw;
+    -webkit-animation-delay: 3s;
     animation-delay: 3s;
     border: 5px solid $whiteColor;
     background-color: transparent;
@@ -509,6 +547,7 @@ body {
     width: 30px;
     height: 30px;
     left: 55vw;
+    -webkit-animation-delay: 6s;
     animation-delay: 6s;
     border: 5px solid $whiteColor;
     background-color: transparent;
@@ -518,11 +557,13 @@ body {
     width: 40px;
     height: 40px;
     left: 65vw;
+    -webkit-animation-delay: 5s;
     animation-delay: 5s;
   }
 
   &:nth-child(8) {
     left: 75vw;
+    -webkit-animation-delay: 7s;
     animation-delay: 7s;
   }
 
@@ -538,6 +579,7 @@ body {
     width: 60px;
     height: 60px;
     left: 90vw;
+    -webkit-animation-delay: 3s;
     animation-delay: 3s;
   }
 
@@ -545,6 +587,7 @@ body {
     width: 30px;
     height: 30px;
     left: 10vw;
+    -webkit-animation-delay: 15s;
     animation-delay: 15s;
     border: 5px solid $whiteColor;
     background-color: transparent;
@@ -554,11 +597,13 @@ body {
     width: 20px;
     height: 20px;
     left: 40vw;
+    -webkit-animation-delay: 18s;
     animation-delay: 18s;
   }
 
   &:nth-child(13) {
     left: 50vw;
+    -webkit-animation-delay: 20s;
     animation-delay: 20s;
     border: 5px solid $whiteColor;
     background-color: transparent;
@@ -568,6 +613,7 @@ body {
     width: 30px;
     height: 30px;
     left: 55vw;
+    -webkit-animation-delay: 10s;
     animation-delay: 10s;
   }
 
@@ -575,6 +621,7 @@ body {
     width: 40px;
     height: 40px;
     left: 90vw;
+    -webkit-animation-delay: 9s;
     animation-delay: 9s;
     border: 5px solid $whiteColor;
     background-color: transparent;
@@ -598,6 +645,7 @@ body {
 
 .video {
   width: 100%;
+  -o-object-fit: cover;
   object-fit: cover;
 }
 
@@ -713,6 +761,7 @@ body {
 
   @media screen and (min-width: $mediumWidth) {
     @include flex(row, flex-start, center);
+    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
   }
 }
@@ -726,11 +775,13 @@ body {
 
   @media screen and (min-width: $largeWidth) {
     width: 20%;
-    padding: 0 2.5rem;
+    padding: 1.5rem;
+    text-align: center;
 
     &:nth-of-type(1) {
       width: 40%;
-      padding-left: 0;
+      text-align: left;
+      border: 5px solid rgba(255, 255, 255, 0.2);
     }
   }
 }
@@ -747,6 +798,8 @@ body {
 .fullimagecontainer {
   width: 100%;
   min-height: 200px;
+  border: 5px solid $whiteColor;
+  line-height: 0;
 
   img {
     width: 100%;
@@ -759,13 +812,15 @@ body {
 
   @media screen and (min-width: $largeWidth) {
     width: 60%;
-    min-height: 500px;
+    min-height: 400px;
   }
 }
 
 .gallery__images {
   width: 100%;
+  line-height: 0;
   @include flex(row, center, center);
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 
   @media screen and (min-width: $largeWidth) {
@@ -776,6 +831,8 @@ body {
     display: block;
     width: 20%;
     opacity: 0.5;
+    -webkit-transition: opacity 0.2s;
+    -o-transition: opacity 0.2s;
     transition: opacity 0.2s;
     margin: 5px;
     @include flex(row, center, center);
@@ -790,6 +847,7 @@ body {
       width: 30%;
       margin: 0 0.5rem 0.5rem;
     }
+
   }
 
   img {
@@ -844,30 +902,47 @@ body {
 }
 
 /* animations */
-// @keyframes gradient-animation {
-//   0% {
-//     background-position: 0 50%;
-//   } 50% {
-//     background-position: 100% 50%;
-//   } 100% {
-//     background-position: 0 50%;
-//   }
-// }
-
-@keyframes rotate3d-animation {
+@-webkit-keyframes rotate3d-animation {
   0% {
+    -webkit-transform: rotate3d(0, 0, 0, 0);
     transform: rotate3d(0, 0, 0, 0);
   } 100% {
+    -webkit-transform: rotate3d(1, 1, 1, 360deg);
     transform: rotate3d(1, 1, 1, 360deg);
+  }
+}
+@keyframes rotate3d-animation {
+  0% {
+    -webkit-transform: rotate3d(0, 0, 0, 0);
+    transform: rotate3d(0, 0, 0, 0);
+  } 100% {
+    -webkit-transform: rotate3d(1, 1, 1, 360deg);
+    transform: rotate3d(1, 1, 1, 360deg);
+  }
+}
+
+@-webkit-keyframes decoration-animation {
+  0% {
+    -webkit-transform: scale(0.2) rotate(0);
+    transform: scale(0.2) rotate(0);
+    opacity: 0.1;
+    bottom: 0;
+  } 100% {
+    -webkit-transform: scale(1) rotate(360deg);
+    transform: scale(1) rotate(360deg);
+    opacity: 0.2;
+    bottom: 100%;
   }
 }
 
 @keyframes decoration-animation {
   0% {
-    transform: scale(0) rotate(0);
+    -webkit-transform: scale(0.2) rotate(0);
+    transform: scale(0.2) rotate(0);
     opacity: 0.1;
     bottom: 0;
   } 100% {
+    -webkit-transform: scale(1) rotate(360deg);
     transform: scale(1) rotate(360deg);
     opacity: 0.2;
     bottom: 100%;
